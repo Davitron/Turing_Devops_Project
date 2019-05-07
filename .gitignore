@@ -11,3 +11,6 @@
 secrets/
 
 __pycache__
+main.tf
+terraform-init
+terraform-init-false

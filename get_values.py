@@ -46,6 +46,10 @@ def get_env():
     if variables_count != len(variables_store):
         exit_process("VAR_ERR")
 
+def prepare_secrets():
+    os.system('mkdir secrets')
+    os.system('echo $GOOGLE_CREDENTIALS | base64 --decode > secrets/google-creds-staging.json')
+
 def generate_main_file():
     # remove esisting main file
     main_file_exists = os.path.isfile(main_file)
@@ -60,7 +64,7 @@ def generate_main_file():
     rendered_main_file.close()
 
 def run_terraform_commands():
-    os.system('gsutil cp gs://'+os.getenv('BUCKET')+'/'+os.getenv('PREFIX')+'/default.tfstate')
+    os.system('gsutil cp gs://'+os.getenv('BUCKET')+'/'+os.getenv('PREFIX')+'/default.tfstate terraform.tfstate' )
     os.system('chmod +x ./run_terraform.sh')
     run_terrsform = subprocess.call('./run_terraform.sh')
     if run_terrsform == 0:
@@ -69,6 +73,7 @@ def run_terraform_commands():
         exit_process("TERRAFORM_ERR")
 
 def main():
+    prepare_secrets()
     prep_full_image_names()
     get_env()
     generate_main_file()

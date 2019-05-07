@@ -3,6 +3,11 @@
 set -e
 
 function run_terraform {
+  touch terrform-init
+  echo "bucket=$BUCKET" >> terrafrom-init
+  echo "prefix=$PREFIX" >> terraform-init
+  echo "credentials=$CREDENTIALS_FILE" >> terraform-init
+  terraform init --backend-config=terraform-init
   terraform plan -target module.cluster
   terraform apply -target module.cluster -auto-approve
   gcloud container clusters get-credentials turing

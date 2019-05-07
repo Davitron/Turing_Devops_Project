@@ -1,0 +1,3 @@
+buckect = "bucket name"
+prefix = "busket/path/to/terraform/state"
+credentials = "path/to/service/account/json"
