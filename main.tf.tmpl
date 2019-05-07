@@ -1,0 +1,18 @@
+module "cluster" {{
+    source              = "./modules/cluster"
+    project             = "{google_project_id}"
+    region              = "{google_compute_region}"
+    location            = "{google_compute_zone}" 
+    credentials         = "{credential_file}"
+    bucket              = "{bucket}"
+    prefix              = "{prefix}"
+}}
+
+module "deployments" {{
+  source                      = "./modules/deployments"
+  credentials_file            = "{credential_file}"
+  namespace                   = "{namespace}"
+  react_app_name              = "{react_app_name}"
+  react_app_image             = "{react_app_image}"
+  react_app_container_port    = "{react_app_container_port}"
+}}

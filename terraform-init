@@ -1,0 +1,3 @@
+buckect = "turing_apps"
+prefix = "infrastructure/terraform_state"
+credentials = "./secrets/service-account.json"
