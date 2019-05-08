@@ -7,6 +7,7 @@
 
 # .tfvars files
 *.tfvars
+.env
 
 secrets/
 
@@ -14,3 +15,4 @@ __pycache__
 main.tf
 terraform-init
 terraform-init-false
+current_version

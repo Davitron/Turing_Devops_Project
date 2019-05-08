@@ -64,11 +64,12 @@ def generate_main_file():
     rendered_main_file.close()
 
 def run_terraform_commands():
-    os.system('gsutil cp gs://'+os.getenv('BUCKET')+'/'+os.getenv('PREFIX')+'/default.tfstate terraform.tfstate' )
+    os.system('gsutil cp gs://'+os.getenv('BUCKET')+'/'+os.getenv('PREFIX')+'/default.tfstate terraform.tfstate')
     os.system('chmod +x ./run_terraform.sh')
     run_terrsform = subprocess.call('./run_terraform.sh')
     if run_terrsform == 0:
         print('deployment successful')
+        os.system('gsutil cp terraform.tfstate gs://'+os.getenv('BUCKET')+'/'+os.getenv('PREFIX')+'/default.tfstate')
     else:
         exit_process("TERRAFORM_ERR")
 
